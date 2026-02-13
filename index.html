@@ -1,14 +1,63 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메세지 관계론</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <header>
+        <h1>메세지 관계론</h1>
+    </header>
+    <main>
+        <div class="card">
+            <h2>1. 관계 정의</h2>
+            <input type="text" id="relationship" placeholder="예: 10년지기 친구, 직장 상사">
+        </div>
+
+        <div class="card">
+            <h2>2. 대화 내용 업로드 (선택)</h2>
+            <p>주고받은 메시지 스크린샷을 최대 3개까지 업로드하면, 대화 스타일을 분석하여 더 정확한 메시지를 추천해 드립니다.</p>
+            <div class="upload-area">
+                <button class="upload-btn" data-for="file-input-1">파일 선택 1</button>
+                <input type="file" id="file-input-1" class="file-input" accept="image/*">
+                <p id="file-name-1" class="file-name">선택된 파일 없음</p>
+            </div>
+            <div class="upload-area">
+                <button class="upload-btn" data-for="file-input-2">파일 선택 2</button>
+                <input type="file" id="file-input-2" class="file-input" accept="image/*">
+                <p id="file-name-2" class="file-name">선택된 파일 없음</p>
+            </div>
+            <div class="upload-area">
+                <button class="upload-btn" data-for="file-input-3">파일 선택 3</button>
+                <input type="file" id="file-input-3" class="file-input" accept="image/*">
+                <p id="file-name-3" class="file-name">선택된 파일 없음</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>3. 메시지 코칭</h2>
+            <textarea id="original-message" placeholder="전하고 싶은 메시지의 핵심 내용을 입력하세요."></textarea>
+            <div class="tone-selector">
+                <p>어떤 톤으로 전달하고 싶으신가요?</p>
+                <button class="tone-btn">진지하게</button>
+                <button class="tone-btn">유머러스하게</button>
+                <button class="tone-btn">친근하게</button>
+                <button class="tone-btn">단호하게</button>
+            </div>
+        </div>
+
+        <div class="card result-card">
+            <h2>코칭 결과</h2>
+            <div id="coaching-results">
+                <p class="placeholder">이곳에 추천 메시지가 표시됩니다.</p>
+            </div>
+        </div>
+    </main>
+    <script src="main.js"></script>
 </body>
 </html>
