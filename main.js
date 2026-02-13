@@ -32,6 +32,7 @@ function runApplication() {
     const toneButtons = document.querySelectorAll('.tone-btn');
     const uploadButtons = document.querySelectorAll('.upload-btn');
     const fileInputs = document.querySelectorAll('.file-input');
+    const themeToggle = document.getElementById('theme-toggle');
     let selectedTone = null;
 
     // --- Function Definitions ---
@@ -85,6 +86,41 @@ function runApplication() {
         });
     }
 
+    // --- Theme Handling ---
+    const themeStorageKey = 'theme-preference';
+
+    function getSystemTheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        if (themeToggle) {
+            const isDark = theme === 'dark';
+            themeToggle.textContent = isDark ? '화이트모드' : '다크모드';
+            themeToggle.setAttribute('aria-pressed', String(isDark));
+        }
+    }
+
+    function initializeTheme() {
+        const storedTheme = localStorage.getItem(themeStorageKey);
+        const theme = storedTheme || getSystemTheme();
+        applyTheme(theme);
+    }
+
+    function toggleTheme() {
+        const currentTheme = document.body.getAttribute('data-theme') || getSystemTheme();
+        const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem(themeStorageKey, nextTheme);
+        applyTheme(nextTheme);
+    }
+
+    initializeTheme();
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+
     // --- Event Listener Setup ---
 
     toneButtons.forEach(button => {
@@ -116,26 +152,6 @@ function runApplication() {
     });
 
     originalMessageInput.addEventListener('input', generateCoachingResults);
-
-    // --- Dynamic Styles ---
-    const style = document.createElement('style');
-    style.textContent = `
-        .coached-message {
-            background-color: #fff;
-            border: 1px solid #d1d1d1;
-            border-left: 5px solid var(--accent-color);
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            animation: fadeIn 0.5s ease;
-        }
-        .coached-message p { white-space: pre-wrap; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    `;
-    document.head.appendChild(style);
 }
 
 // --- Start the initialization process ---
