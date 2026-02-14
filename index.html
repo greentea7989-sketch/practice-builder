@@ -3,64 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메세지 관계론</title>
+    <title>식사 메뉴 추첨기</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Gowun+Dodum&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="site-header">
-        <h1>메세지 관계론</h1>
-        <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
-            다크모드
-        </button>
+        <div class="brand">
+            <span class="brand-tag">Menu Raffle</span>
+            <h1>식사 메뉴 추첨기</h1>
+            <p>후보를 모아 한 번에 뽑아보세요. 오늘의 메뉴는 운명에 맡깁니다.</p>
+        </div>
+        <div class="header-actions">
+            <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
+                다크모드
+            </button>
+            <button id="draw-button" class="primary-btn" type="button">
+                지금 추첨
+            </button>
+        </div>
     </header>
-    <main>
-        <div class="card">
-            <h2>1. 관계 정의</h2>
-            <input type="text" id="relationship" placeholder="예: 10년지기 친구, 직장 상사">
-        </div>
 
-        <div class="card">
-            <h2>2. 대화 내용 업로드 (선택)</h2>
-            <p>주고받은 메시지 스크린샷을 최대 3개까지 업로드하면, 대화 스타일을 분석하여 더 정확한 메시지를 추천해 드립니다.</p>
-            <div class="upload-area">
-                <button class="upload-btn" data-for="file-input-1">파일 선택 1</button>
-                <input type="file" id="file-input-1" class="file-input" accept="image/*">
-                <p id="file-name-1" class="file-name">선택된 파일 없음</p>
+    <main class="grid">
+        <section class="card input-card">
+            <h2>후보 입력</h2>
+            <p class="helper">줄마다 메뉴 1개씩 입력하세요. 콤마(,)로도 구분됩니다.</p>
+            <textarea id="menu-input" placeholder="예: 김치찌개\n초밥\n파스타"></textarea>
+            <div class="inline-actions">
+                <button id="fill-sample" class="ghost-btn" type="button">샘플 채우기</button>
+                <button id="clear-input" class="ghost-btn" type="button">비우기</button>
             </div>
-            <div class="upload-area">
-                <button class="upload-btn" data-for="file-input-2">파일 선택 2</button>
-                <input type="file" id="file-input-2" class="file-input" accept="image/*">
-                <p id="file-name-2" class="file-name">선택된 파일 없음</p>
+            <div class="chip-group">
+                <button class="chip" type="button" data-add="김치찌개">김치찌개</button>
+                <button class="chip" type="button" data-add="제육볶음">제육볶음</button>
+                <button class="chip" type="button" data-add="돈까스">돈까스</button>
+                <button class="chip" type="button" data-add="마라탕">마라탕</button>
+                <button class="chip" type="button" data-add="샐러드">샐러드</button>
+                <button class="chip" type="button" data-add="라멘">라멘</button>
+                <button class="chip" type="button" data-add="쌀국수">쌀국수</button>
+                <button class="chip" type="button" data-add="피자">피자</button>
             </div>
-            <div class="upload-area">
-                <button class="upload-btn" data-for="file-input-3">파일 선택 3</button>
-                <input type="file" id="file-input-3" class="file-input" accept="image/*">
-                <p id="file-name-3" class="file-name">선택된 파일 없음</p>
+            <div class="meta-row">
+                <span id="menu-count">후보 0개</span>
+                <span id="filtered-count">필터 적용 후 0개</span>
             </div>
-        </div>
+        </section>
 
-        <div class="card">
-            <h2>3. 메시지 코칭</h2>
-            <textarea id="original-message" placeholder="전하고 싶은 메시지의 핵심 내용을 입력하세요."></textarea>
-            <div class="tone-selector">
-                <p>어떤 톤으로 전달하고 싶으신가요?</p>
-                <button class="tone-btn">진지하게</button>
-                <button class="tone-btn">유머러스하게</button>
-                <button class="tone-btn">친근하게</button>
-                <button class="tone-btn">단호하게</button>
+        <section class="card option-card">
+            <h2>추첨 옵션</h2>
+            <div class="field-grid">
+                <label class="field">
+                    <span>뽑을 개수</span>
+                    <input id="draw-count" type="number" min="1" value="1">
+                </label>
+                <label class="field toggle-field">
+                    <span>중복 허용</span>
+                    <input id="allow-duplicate" type="checkbox">
+                    <span class="toggle-slider"></span>
+                </label>
             </div>
-        </div>
+            <label class="field">
+                <span>제외 키워드</span>
+                <input id="exclude-input" type="text" placeholder="예: 매운, 해산물, 면">
+                <small>키워드가 포함된 메뉴는 자동 제외됩니다.</small>
+            </label>
+            <label class="field">
+                <span>분위기</span>
+                <div class="mood-buttons">
+                    <button class="mood-btn" type="button" data-mood="간단하게">간단하게</button>
+                    <button class="mood-btn" type="button" data-mood="든든하게">든든하게</button>
+                    <button class="mood-btn" type="button" data-mood="가볍게">가볍게</button>
+                    <button class="mood-btn" type="button" data-mood="매콤하게">매콤하게</button>
+                </div>
+            </label>
+            <div class="status" id="status-message">메뉴를 입력하고 추첨 버튼을 눌러보세요.</div>
+        </section>
 
-        <div class="card result-card">
-            <h2>코칭 결과</h2>
-            <div id="coaching-results">
-                <p class="placeholder">이곳에 추천 메시지가 표시됩니다.</p>
+        <section class="card result-card">
+            <div class="result-header">
+                <h2>오늘의 메뉴</h2>
+                <div class="result-actions">
+                    <button id="copy-result" class="ghost-btn" type="button">결과 복사</button>
+                    <button id="clear-history" class="ghost-btn" type="button">기록 지우기</button>
+                </div>
             </div>
-        </div>
+            <div id="result-box" class="result-box">
+                <p class="placeholder">아직 추첨 전입니다.</p>
+            </div>
+            <div class="history">
+                <h3>추첨 기록</h3>
+                <ul id="history-list"></ul>
+            </div>
+        </section>
     </main>
+
     <script src="main.js"></script>
 </body>
 </html>
