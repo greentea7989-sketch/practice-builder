@@ -188,6 +188,7 @@ h2 {
 
 textarea,
 input[type="text"],
+input[type="email"],
 input[type="number"] {
     width: 100%;
     font-family: var(--font-body);
@@ -202,12 +203,14 @@ input[type="number"] {
 
 [data-theme="dark"] textarea,
 [data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="email"],
 [data-theme="dark"] input[type="number"] {
     background: #15110e;
 }
 
 textarea:focus,
 input[type="text"]:focus,
+input[type="email"]:focus,
 input[type="number"]:focus {
     outline: none;
     border-color: var(--primary);
@@ -331,6 +334,35 @@ textarea {
     color: #0f1a16;
 }
 
+.tag-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.tag-btn {
+    border: 1px solid var(--outline);
+    background: rgba(255, 107, 53, 0.12);
+    color: var(--primary-dark);
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: var(--font-title);
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.tag-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px var(--shadow);
+}
+
+.tag-btn.active {
+    background: var(--primary);
+    color: #1f120a;
+    border-color: var(--primary-dark);
+}
+
 .status {
     margin-top: 1.2rem;
     padding: 0.9rem 1rem;
@@ -342,6 +374,42 @@ textarea {
 
 .result-card {
     grid-column: span 2;
+}
+
+.contact-card {
+    grid-column: span 2;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.field--full {
+    grid-column: 1 / -1;
+}
+
+.contact-form textarea {
+    min-height: 140px;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.form-note {
+    color: var(--muted);
+    font-size: 0.9rem;
 }
 
 .result-header {
@@ -443,6 +511,10 @@ textarea {
 
 @media (max-width: 900px) {
     .result-card {
+        grid-column: span 1;
+    }
+
+    .contact-card {
         grid-column: span 1;
     }
 }

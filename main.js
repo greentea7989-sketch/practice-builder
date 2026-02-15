@@ -15,11 +15,14 @@ const clearHistoryButton = document.getElementById('clear-history');
 const historyList = document.getElementById('history-list');
 const chipButtons = document.querySelectorAll('.chip');
 const moodButtons = document.querySelectorAll('.mood-btn');
+const tagButtons = document.querySelectorAll('.tag-btn');
+const clearTagsButton = document.getElementById('clear-tags');
 
 const themeStorageKey = 'theme-preference';
 let lastResults = [];
 let selectedMood = null;
 let spinTimer = null;
+const selectedTags = new Set();
 
 const sampleMenus = [
     '김치찌개',
