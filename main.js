@@ -258,6 +258,65 @@ function clearHistory() {
     setStatus('추첨 기록을 지웠습니다.');
 }
 
+function setupContactForm() {
+    const form = document.querySelector('.contact-form');
+    if (!form) {
+        return;
+    }
+    const statusBox = form.querySelector('.form-status');
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    const showStatus = (message, isError = false) => {
+        if (!statusBox) {
+            return;
+        }
+        statusBox.textContent = message;
+        statusBox.classList.toggle('is-error', isError);
+        statusBox.classList.add('is-visible');
+    };
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (submitButton) {
+            submitButton.disabled = true;
+        }
+        showStatus('전송 중입니다. 잠시만 기다려 주세요...');
+
+        try {
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: new FormData(form),
+                headers: {
+                    Accept: 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                form.reset();
+                showStatus('문의가 정상적으로 접수되었습니다. 빠르게 회신드릴게요!');
+            } else {
+                let errorMessage = '전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
+                try {
+                    const data = await response.json();
+                    if (data && data.errors && data.errors.length > 0) {
+                        errorMessage = data.errors.map(error => error.message).join(' ');
+                    }
+                } catch (error) {
+                    // Ignore JSON parsing errors and use default message.
+                }
+                showStatus(errorMessage, true);
+            }
+        } catch (error) {
+            showStatus('네트워크 오류가 발생했습니다. 연결을 확인해 주세요.', true);
+        } finally {
+            if (submitButton) {
+                submitButton.disabled = false;
+            }
+        }
+    });
+}
+
 function handleMoodSelection(event) {
     const button = event.currentTarget;
     moodButtons.forEach(btn => btn.classList.remove('active'));
@@ -268,6 +327,7 @@ function handleMoodSelection(event) {
 
 initializeTheme();
 updateCounts();
+setupContactForm();
 
 if (themeToggle) {
     themeToggle.addEventListener('click', toggleTheme);
