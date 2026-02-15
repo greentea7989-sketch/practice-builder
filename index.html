@@ -132,21 +132,13 @@
     </main>
 
     <script>
-        const disqusShortname = 'YOUR_DISQUS_SHORTNAME';
-        const disqus_config = function () {
-            this.page.url = window.location.href;
-            this.page.identifier = window.location.pathname || 'menu-raffle';
-        };
-
-        if (disqusShortname && disqusShortname !== 'YOUR_DISQUS_SHORTNAME') {
-            (function () {
-                const d = document;
-                const s = d.createElement('script');
-                s.src = `https://${disqusShortname}.disqus.com/embed.js`;
-                s.setAttribute('data-timestamp', String(+new Date()));
-                (d.head || d.body).appendChild(s);
-            })();
-        }
+        (function () {
+            const d = document;
+            const s = d.createElement('script');
+            s.src = 'https://sigsa-menyu-cuceon-yeonseub-1.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', String(+new Date()));
+            (d.head || d.body).appendChild(s);
+        })();
     </script>
     <script src="main.js"></script>
 </body>
