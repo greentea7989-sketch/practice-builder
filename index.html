@@ -30,21 +30,9 @@
         <section class="card input-card">
             <h2>후보 입력</h2>
             <p class="helper">줄마다 메뉴 1개씩 입력하세요. 콤마(,)로도 구분됩니다.</p>
-            <p class="helper">태그는 `#한식`처럼 붙이거나 `메뉴 | 한식, 국물` 형식으로 적어주세요.</p>
             <textarea id="menu-input" placeholder="예: 김치찌개 #한식 #찌개\n초밥 #일식\n파스타 | 양식, 크리미"></textarea>
             <div class="inline-actions">
-                <button id="fill-sample" class="ghost-btn" type="button">샘플 채우기</button>
                 <button id="clear-input" class="ghost-btn" type="button">비우기</button>
-            </div>
-            <div class="chip-group">
-                <button class="chip" type="button" data-add="김치찌개 #한식 #찌개">김치찌개</button>
-                <button class="chip" type="button" data-add="제육볶음 #한식">제육볶음</button>
-                <button class="chip" type="button" data-add="돈까스 #일식">돈까스</button>
-                <button class="chip" type="button" data-add="마라탕 #중식 #매운">마라탕</button>
-                <button class="chip" type="button" data-add="샐러드 #가볍게">샐러드</button>
-                <button class="chip" type="button" data-add="라멘 #일식 #면">라멘</button>
-                <button class="chip" type="button" data-add="쌀국수 #동남아 #면">쌀국수</button>
-                <button class="chip" type="button" data-add="피자 #양식">피자</button>
             </div>
             <div class="meta-row">
                 <span id="menu-count">후보 0개</span>
@@ -69,23 +57,6 @@
                 <span>제외 키워드</span>
                 <input id="exclude-input" type="text" placeholder="예: 매운, 해산물, 면">
                 <small>키워드가 포함된 메뉴는 자동 제외됩니다.</small>
-            </label>
-            <label class="field">
-                <span>태그 필터</span>
-                <div class="tag-filter">
-                    <button class="tag-btn" type="button" data-tag="한식">한식</button>
-                    <button class="tag-btn" type="button" data-tag="중식">중식</button>
-                    <button class="tag-btn" type="button" data-tag="일식">일식</button>
-                    <button class="tag-btn" type="button" data-tag="양식">양식</button>
-                    <button class="tag-btn" type="button" data-tag="분식">분식</button>
-                    <button class="tag-btn" type="button" data-tag="면">면</button>
-                    <button class="tag-btn" type="button" data-tag="매운">매운</button>
-                    <button class="tag-btn" type="button" data-tag="가볍게">가볍게</button>
-                    <button class="tag-btn" type="button" data-tag="국물">국물</button>
-                    <button class="tag-btn" type="button" data-tag="간편식">간편식</button>
-                </div>
-                <button id="clear-tags" class="ghost-btn" type="button">태그 초기화</button>
-                <small>태그를 여러 개 선택하면 그 중 하나라도 포함된 메뉴만 남습니다.</small>
             </label>
             <label class="field">
                 <span>분위기</span>

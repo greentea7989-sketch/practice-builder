@@ -1,7 +1,6 @@
 const themeToggle = document.getElementById('theme-toggle');
 const drawButton = document.getElementById('draw-button');
 const menuInput = document.getElementById('menu-input');
-const fillSampleButton = document.getElementById('fill-sample');
 const clearInputButton = document.getElementById('clear-input');
 const menuCount = document.getElementById('menu-count');
 const filteredCount = document.getElementById('filtered-count');
@@ -13,31 +12,12 @@ const resultBox = document.getElementById('result-box');
 const copyResultButton = document.getElementById('copy-result');
 const clearHistoryButton = document.getElementById('clear-history');
 const historyList = document.getElementById('history-list');
-const chipButtons = document.querySelectorAll('.chip');
 const moodButtons = document.querySelectorAll('.mood-btn');
-const tagButtons = document.querySelectorAll('.tag-btn');
-const clearTagsButton = document.getElementById('clear-tags');
 
 const themeStorageKey = 'theme-preference';
 let lastResults = [];
 let selectedMood = null;
 let spinTimer = null;
-const selectedTags = new Set();
-
-const sampleMenus = [
-    '김치찌개',
-    '제육볶음',
-    '돈까스',
-    '초밥',
-    '파스타',
-    '샐러드',
-    '부대찌개',
-    '치킨',
-    '짜장면',
-    '쌀국수',
-    '마라탕',
-    '피자'
-];
 
 function getSystemTheme() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -218,21 +198,6 @@ function drawMenus() {
     });
 }
 
-function addMenuItem(item) {
-    const existing = menuInput.value.trim();
-    if (!existing) {
-        menuInput.value = item;
-    } else {
-        menuInput.value = `${existing}\n${item}`;
-    }
-    updateCounts();
-}
-
-function fillSample() {
-    menuInput.value = sampleMenus.join('\n');
-    updateCounts();
-}
-
 function clearInput() {
     menuInput.value = '';
     updateCounts();
@@ -336,14 +301,9 @@ if (themeToggle) {
 drawButton.addEventListener('click', drawMenus);
 menuInput.addEventListener('input', updateCounts);
 excludeInput.addEventListener('input', updateCounts);
-fillSampleButton.addEventListener('click', fillSample);
 clearInputButton.addEventListener('click', clearInput);
 copyResultButton.addEventListener('click', copyResult);
 clearHistoryButton.addEventListener('click', clearHistory);
-
-chipButtons.forEach(button => {
-    button.addEventListener('click', () => addMenuItem(button.dataset.add));
-});
 
 moodButtons.forEach(button => {
     button.addEventListener('click', handleMoodSelection);

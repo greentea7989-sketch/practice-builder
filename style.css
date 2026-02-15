@@ -109,7 +109,6 @@ h1 {
 .theme-toggle,
 .primary-btn,
 .ghost-btn,
-.chip,
 .mood-btn {
     font-family: var(--font-title);
     border: none;
@@ -229,23 +228,6 @@ textarea {
     flex-wrap: wrap;
 }
 
-.chip-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.chip {
-    background: rgba(27, 153, 139, 0.14);
-    color: var(--secondary-dark);
-    border: 1px solid rgba(27, 153, 139, 0.3);
-    padding: 0.35rem 0.9rem;
-}
-
-.chip:hover {
-    transform: translateY(-2px);
-}
-
 .meta-row {
     margin-top: 1.4rem;
     display: flex;
@@ -332,35 +314,6 @@ textarea {
     border-style: solid;
     background: var(--secondary);
     color: #0f1a16;
-}
-
-.tag-filter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-}
-
-.tag-btn {
-    border: 1px solid var(--outline);
-    background: rgba(255, 107, 53, 0.12);
-    color: var(--primary-dark);
-    padding: 0.4rem 1rem;
-    border-radius: 999px;
-    cursor: pointer;
-    font-family: var(--font-title);
-    font-weight: 600;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-
-.tag-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px var(--shadow);
-}
-
-.tag-btn.active {
-    background: var(--primary);
-    color: #1f120a;
-    border-color: var(--primary-dark);
 }
 
 .status {
