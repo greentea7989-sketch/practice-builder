@@ -122,8 +122,32 @@
                 <div class="form-status" role="status" aria-live="polite"></div>
             </form>
         </section>
+
+        <section class="card comments-card">
+            <h2>댓글</h2>
+            <p class="helper">식사 메뉴 아이디어를 공유해 주세요.</p>
+            <div id="disqus_thread"></div>
+            <noscript>댓글을 보려면 자바스크립트를 활성화해 주세요.</noscript>
+        </section>
     </main>
 
+    <script>
+        const disqusShortname = 'YOUR_DISQUS_SHORTNAME';
+        const disqus_config = function () {
+            this.page.url = window.location.href;
+            this.page.identifier = window.location.pathname || 'menu-raffle';
+        };
+
+        if (disqusShortname && disqusShortname !== 'YOUR_DISQUS_SHORTNAME') {
+            (function () {
+                const d = document;
+                const s = d.createElement('script');
+                s.src = `https://${disqusShortname}.disqus.com/embed.js`;
+                s.setAttribute('data-timestamp', String(+new Date()));
+                (d.head || d.body).appendChild(s);
+            })();
+        }
+    </script>
     <script src="main.js"></script>
 </body>
 </html>
