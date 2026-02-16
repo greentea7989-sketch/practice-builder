@@ -6,17 +6,14 @@ const menuCount = document.getElementById('menu-count');
 const filteredCount = document.getElementById('filtered-count');
 const drawCountInput = document.getElementById('draw-count');
 const allowDuplicateInput = document.getElementById('allow-duplicate');
-const excludeInput = document.getElementById('exclude-input');
-const statusMessage = document.getElementById('status-message');
 const resultBox = document.getElementById('result-box');
 const copyResultButton = document.getElementById('copy-result');
 const clearHistoryButton = document.getElementById('clear-history');
 const historyList = document.getElementById('history-list');
-const moodButtons = document.querySelectorAll('.mood-btn');
+const statusMessage = document.getElementById('status-message');
 
 const themeStorageKey = 'theme-preference';
 let lastResults = [];
-let selectedMood = null;
 let spinTimer = null;
 
 function getSystemTheme() {
@@ -64,33 +61,16 @@ function normalizeMenus(text) {
     return uniqueItems;
 }
 
-function getExcludeKeywords() {
-    return excludeInput.value
-        .split(/[,\s]+/)
-        .map(word => word.trim())
-        .filter(Boolean);
-}
-
-function filterMenus(menus, keywords) {
-    if (keywords.length === 0) {
-        return menus;
-    }
-
-    const lowered = keywords.map(word => word.toLowerCase());
-    return menus.filter(menu => {
-        const menuLower = menu.toLowerCase();
-        return !lowered.some(word => menuLower.includes(word));
-    });
-}
-
 function updateCounts() {
     const menus = normalizeMenus(menuInput.value);
-    const filtered = filterMenus(menus, getExcludeKeywords());
     menuCount.textContent = `후보 ${menus.length}개`;
-    filteredCount.textContent = `필터 적용 후 ${filtered.length}개`;
+    filteredCount.textContent = `정리 후 ${menus.length}개`;
 }
 
 function setStatus(message) {
+    if (!statusMessage) {
+        return;
+    }
     statusMessage.textContent = message;
 }
 
@@ -151,12 +131,11 @@ function drawMenus() {
         return;
     }
     const menus = normalizeMenus(menuInput.value);
-    const filteredMenus = filterMenus(menus, getExcludeKeywords());
 
     updateCounts();
 
-    if (filteredMenus.length === 0) {
-        setStatus('추첨할 메뉴가 없습니다. 후보를 입력하거나 필터를 조정하세요.');
+    if (menus.length === 0) {
+        setStatus('추첨할 메뉴가 없습니다. 후보를 입력해 주세요.');
         renderResults([]);
         return;
     }
@@ -164,16 +143,15 @@ function drawMenus() {
     const drawCount = Math.max(1, Number(drawCountInput.value) || 1);
     const allowDuplicate = allowDuplicateInput.checked;
 
-    if (!allowDuplicate && drawCount > filteredMenus.length) {
-        setStatus(`중복 없이 ${drawCount}개를 뽑을 수 없어요. 최대 ${filteredMenus.length}개까지 가능합니다.`);
+    if (!allowDuplicate && drawCount > menus.length) {
+        setStatus(`중복 없이 ${drawCount}개를 뽑을 수 없어요. 최대 ${menus.length}개까지 가능합니다.`);
         renderResults([]);
         return;
     }
 
-    const moodInfo = selectedMood ? `분위기: ${selectedMood}. ` : '';
-    setStatus(`${moodInfo}추첨을 시작합니다!`);
+    setStatus('추첨을 시작합니다!');
 
-    const pool = [...filteredMenus];
+    const pool = [...menus];
 
     drawButton.disabled = true;
     startSpinAnimation(pool, () => {
@@ -282,14 +260,6 @@ function setupContactForm() {
     });
 }
 
-function handleMoodSelection(event) {
-    const button = event.currentTarget;
-    moodButtons.forEach(btn => btn.classList.remove('active'));
-    button.classList.add('active');
-    selectedMood = button.dataset.mood;
-    setStatus(`분위기 "${selectedMood}"로 맞춰볼게요.`);
-}
-
 initializeTheme();
 updateCounts();
 setupContactForm();
@@ -300,11 +270,6 @@ if (themeToggle) {
 
 drawButton.addEventListener('click', drawMenus);
 menuInput.addEventListener('input', updateCounts);
-excludeInput.addEventListener('input', updateCounts);
 clearInputButton.addEventListener('click', clearInput);
 copyResultButton.addEventListener('click', copyResult);
 clearHistoryButton.addEventListener('click', clearHistory);
-
-moodButtons.forEach(button => {
-    button.addEventListener('click', handleMoodSelection);
-});

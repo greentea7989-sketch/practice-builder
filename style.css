@@ -108,8 +108,7 @@ h1 {
 
 .theme-toggle,
 .primary-btn,
-.ghost-btn,
-.mood-btn {
+.ghost-btn {
     font-family: var(--font-title);
     border: none;
     border-radius: 999px;
@@ -295,34 +294,6 @@ textarea {
 
 .toggle-field input:checked + .toggle-slider::after {
     transform: translateX(24px);
-}
-
-.mood-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-}
-
-.mood-btn {
-    border: 1px dashed var(--outline);
-    background: transparent;
-    color: var(--ink);
-    padding: 0.4rem 1rem;
-}
-
-.mood-btn.active {
-    border-style: solid;
-    background: var(--secondary);
-    color: #0f1a16;
-}
-
-.status {
-    margin-top: 1.2rem;
-    padding: 0.9rem 1rem;
-    border-radius: 12px;
-    background: rgba(255, 107, 53, 0.1);
-    color: var(--primary-dark);
-    font-size: 0.95rem;
 }
 
 .result-card {
