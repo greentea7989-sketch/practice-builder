@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://greentea7989-sketch.github.io/practice-builder/sitemap.xml

@@ -1,0 +1,15 @@
+{
+  "name": "식사 메뉴 추첨기",
+  "short_name": "메뉴추첨",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f1e9",
+  "theme_color": "#ff6b35",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
