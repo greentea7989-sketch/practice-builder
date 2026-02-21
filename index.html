@@ -67,111 +67,206 @@
         }
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "오늘 뭐 먹지 고민될 때 이 사이트가 어떻게 도와주나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "먹고 싶은 메뉴 후보를 입력하면 무작위로 추천해 줍니다. 중복 허용, 여러 개 추첨, 기록 보관 기능으로 빠르게 결정할 수 있어요."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "메뉴를 어떤 방식으로 입력하면 좋나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "줄바꿈이나 콤마로 메뉴를 구분해 입력하면 됩니다. 예: 김치찌개, 초밥, 파스타."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "여러 명이 먹을 메뉴도 추천할 수 있나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "네, 뽑을 개수를 늘려 여러 개 메뉴를 동시에 추천받을 수 있습니다."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "같은 메뉴가 중복으로 나오게 할 수 있나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "중복 허용 옵션을 켜면 같은 메뉴가 다시 나올 수 있어요."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "결과를 다시 확인할 수 있나요?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "추첨 기록이 저장되어 이전 결과를 확인하거나 복사할 수 있습니다."
+            }
+          }
+        ]
+      }
+    </script>
 </head>
 <body>
+  <!-- AddToAny BEGIN -->
+  <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+  <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+  <a class="a2a_button_facebook"></a>
+  <a class="a2a_button_mastodon"></a>
+  <a class="a2a_button_email"></a>
+  <a class="a2a_button_reddit"></a>
+  <a class="a2a_button_x"></a>
+  <a class="a2a_button_threads"></a>
+  <a class="a2a_button_linkedin"></a>
+  <a class="a2a_button_sms"></a>
+  <a class="a2a_button_pinterest"></a>
+  </div>
+  <script defer src="https://static.addtoany.com/menu/page.js"></script>
+  <!-- AddToAny END -->
     <header class="site-header">
         <div class="brand">
-            <span class="brand-tag">Menu Raffle</span>
-            <h1>식사 메뉴 추첨기</h1>
-            <p>후보를 모아 한 번에 뽑아보세요. 오늘의 메뉴는 운명에 맡깁니다.</p>
+            <h1 data-i18n="title">식사 메뉴 추첨기</h1>
+            <p data-i18n="subtitle">후보를 모아 한 번에 뽑아보세요. 오늘의 메뉴는 운명에 맡깁니다.</p>
         </div>
         <div class="header-actions">
+            <label class="lang-select" for="language-select">
+                <span class="sr-only" data-i18n="languageLabel">언어 선택</span>
+                <select id="language-select" aria-label="언어 선택">
+                    <option value="ko">한국어</option>
+                    <option value="en">English</option>
+                    <option value="ja">日本語</option>
+                    <option value="zh-Hans">中文(简体)</option>
+                    <option value="zh-Hant">中文(繁體)</option>
+                    <option value="la">Latina</option>
+                    <option value="vi">Tiếng Việt</option>
+                </select>
+            </label>
             <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">
                 다크모드
-            </button>
-            <button id="draw-button" class="primary-btn" type="button">
-                지금 추첨
             </button>
         </div>
     </header>
 
     <main class="grid">
         <section class="card input-card">
-            <h2>후보 입력</h2>
-            <p class="helper">줄마다 메뉴 1개씩 입력하세요. 콤마(,)로도 구분됩니다.</p>
-            <textarea id="menu-input" placeholder="예: 김치찌개 #한식 #찌개\n초밥 #일식\n파스타 | 양식, 크리미"></textarea>
+            <h2 data-i18n="inputTitle">후보 입력</h2>
+            <p class="helper" data-i18n="inputHelper">줄마다 메뉴 1개씩 입력하세요. 콤마(,)로도 구분됩니다.</p>
+            <textarea id="menu-input" data-i18n-placeholder="inputPlaceholder" placeholder="예: 김치찌개 #한식 #찌개\n초밥 #일식\n파스타 | 양식, 크리미"></textarea>
             <div class="inline-actions">
-                <button id="clear-input" class="ghost-btn" type="button">비우기</button>
+                <button id="clear-input" class="ghost-btn" type="button" data-i18n="clearInput">비우기</button>
             </div>
             <div class="meta-row">
-                <span id="menu-count">후보 0개</span>
-                <span id="filtered-count">정리 후 0개</span>
+                <span id="menu-count" data-i18n="menuCount">후보 0개</span>
+                <span id="filtered-count" data-i18n="filteredCount">정리 후 0개</span>
             </div>
         </section>
 
         <section class="card option-card">
-            <h2>추첨 옵션</h2>
+            <h2 data-i18n="optionTitle">추첨 옵션</h2>
             <div class="field-grid">
                 <label class="field">
-                    <span>뽑을 개수</span>
+                    <span data-i18n="drawCountLabel">뽑을 개수</span>
                     <input id="draw-count" type="number" min="1" value="1">
                 </label>
                 <label class="field toggle-field">
-                    <span>중복 허용</span>
+                    <span data-i18n="allowDuplicateLabel">중복 허용</span>
                     <input id="allow-duplicate" type="checkbox">
                     <span class="toggle-slider"></span>
                 </label>
+            </div>
+            <div class="inline-actions">
+                <button id="draw-button" class="primary-btn" type="button" data-i18n="drawNow">지금 추첨</button>
             </div>
         </section>
 
         <section class="card result-card">
             <div class="result-header">
-                <h2>오늘의 메뉴</h2>
+                <h2 data-i18n="resultTitle">오늘의 메뉴</h2>
                 <div class="result-actions">
-                    <button id="copy-result" class="ghost-btn" type="button">결과 복사</button>
-                    <button id="clear-history" class="ghost-btn" type="button">기록 지우기</button>
+                    <button id="copy-result" class="ghost-btn" type="button" data-i18n="copyResult">결과 복사</button>
+                    <button id="clear-history" class="ghost-btn" type="button" data-i18n="clearHistory">기록 지우기</button>
                 </div>
             </div>
             <div id="result-box" class="result-box">
-                <p class="placeholder">아직 추첨 전입니다.</p>
+                <p class="placeholder" data-i18n="resultPlaceholder">아직 추첨 전입니다.</p>
             </div>
             <div class="history">
-                <h3>추첨 기록</h3>
+                <h3 data-i18n="historyTitle">추첨 기록</h3>
                 <ul id="history-list"></ul>
             </div>
         </section>
 
+
+        <section class="card guide-card">
+            <h2 data-i18n="guideTitle">메뉴 추천 가이드</h2>
+            <p class="helper" data-i18n="guideHelper">상황과 취향을 반영해 후보를 구성하면 추천이 더 만족스러워집니다.</p>
+            <p data-i18n-html="guide1"><strong>혼밥/바쁜 날:</strong> 김밥, 덮밥, 컵밥, 샐러드처럼 빠르게 먹을 수 있는 메뉴를 넣어 보세요.</p>
+            <p data-i18n-html="guide2"><strong>여럿이 함께:</strong> 치킨, 피자, 보쌈처럼 공유하기 좋은 메뉴를 후보로 추천합니다.</p>
+            <p data-i18n-html="guide3"><strong>날씨/기분:</strong> 비 오는 날은 국물, 더운 날은 냉면·샐러드처럼 컨디션에 맞는 키워드를 추가해 보세요.</p>
+            <p data-i18n-html="guide4"><strong>다이어트/건강:</strong> 단백질·채소 중심 메뉴를 모아두면 선택 부담이 줄어듭니다.</p>
+        </section>
+
+        <section class="card faq-card">
+            <h2 data-i18n="faqTitle">자주 묻는 질문</h2>
+            <div class="faq-list">
+                <p data-i18n-html="faq1"><strong>Q. 오늘 뭐 먹지 고민될 때 어떻게 쓰나요?</strong><br>후보 메뉴를 입력하고 “지금 추첨”을 누르면 랜덤 추천을 바로 받을 수 있습니다.</p>
+                <p data-i18n-html="faq2"><strong>Q. 메뉴는 어떤 형식으로 입력하나요?</strong><br>줄바꿈 또는 콤마로 구분해 입력하면 됩니다.</p>
+                <p data-i18n-html="faq3"><strong>Q. 여러 메뉴를 동시에 추천받을 수 있나요?</strong><br>“뽑을 개수”를 늘리면 여러 개가 한 번에 추첨됩니다.</p>
+                <p data-i18n-html="faq4"><strong>Q. 중복 추천이 나오게 할 수 있나요?</strong><br>“중복 허용” 옵션을 켜면 같은 메뉴가 다시 나올 수 있습니다.</p>
+                <p data-i18n-html="faq5"><strong>Q. 추천 결과를 저장할 수 있나요?</strong><br>추첨 기록이 남아 이전 결과를 확인하고 복사할 수 있습니다.</p>
+            </div>
+        </section>
+
         <section class="card contact-card">
-            <h2>제휴 문의</h2>
-            <p class="helper">제품/서비스 제휴, 공동 프로모션, 컨텐츠 협업 등 편하게 문의 주세요.</p>
+            <h2 data-i18n="contactTitle">제휴 문의</h2>
+            <p class="helper" data-i18n="contactHelper">제품/서비스 제휴, 공동 프로모션, 컨텐츠 협업 등 편하게 문의 주세요.</p>
             <form action="https://formspree.io/f/mgolkawk" method="POST" class="contact-form">
                 <input type="hidden" name="_subject" value="Menu Raffle 제휴 문의">
                 <div class="form-grid">
                     <label class="field">
-                        <span>이름</span>
-                        <input type="text" name="name" placeholder="홍길동" required>
+                        <span data-i18n="contactName">이름</span>
+                        <input type="text" name="name" data-i18n-placeholder="contactNamePlaceholder" placeholder="홍길동" required>
                     </label>
                     <label class="field">
-                        <span>이메일</span>
-                        <input type="email" name="email" placeholder="name@company.com" required>
+                        <span data-i18n="contactEmail">이메일</span>
+                        <input type="email" name="email" data-i18n-placeholder="contactEmailPlaceholder" placeholder="name@company.com" required>
                     </label>
                     <label class="field field--full">
-                        <span>회사/팀</span>
-                        <input type="text" name="company" placeholder="회사명 또는 팀명">
+                        <span data-i18n="contactCompany">회사/팀</span>
+                        <input type="text" name="company" data-i18n-placeholder="contactCompanyPlaceholder" placeholder="회사명 또는 팀명">
                     </label>
                     <label class="field field--full">
-                        <span>문의 내용</span>
-                        <textarea name="message" placeholder="제휴 목적, 일정, 예산 범위 등을 알려주세요." required></textarea>
+                        <span data-i18n="contactMessage">문의 내용</span>
+                        <textarea name="message" data-i18n-placeholder="contactMessagePlaceholder" placeholder="제휴 목적, 일정, 예산 범위 등을 알려주세요." required></textarea>
                     </label>
                 </div>
                 <label class="consent">
                     <input type="checkbox" name="consent" value="agree" required>
-                    <span>제휴 문의 처리를 위해 이름, 이메일, 회사/팀, 문의 내용을 수집하는 것에 동의합니다.</span>
+                    <span data-i18n="contactConsent">제휴 문의 처리를 위해 이름, 이메일, 회사/팀, 문의 내용을 수집하는 것에 동의합니다.</span>
                 </label>
-                <p class="consent-note">수집된 정보는 문의 응대 목적 외에는 사용하지 않으며, 처리 후 90일 내 파기합니다.</p>
+                <p class="consent-note" data-i18n="contactConsentNote">수집된 정보는 문의 응대 목적 외에는 사용하지 않으며, 처리 후 90일 내 파기합니다.</p>
                 <div class="form-actions">
-                    <button class="primary-btn" type="submit">제휴 문의 보내기</button>
-                    <span class="form-note">제출 시 Formspree를 통해 이메일로 전달됩니다.</span>
+                    <button class="primary-btn" type="submit" data-i18n="contactSubmit">제휴 문의 보내기</button>
+                    <span class="form-note" data-i18n="contactNote">제출 시 Formspree를 통해 이메일로 전달됩니다.</span>
                 </div>
                 <div class="form-status" role="status" aria-live="polite"></div>
             </form>
         </section>
 
         <section class="card comments-card">
-            <h2>댓글</h2>
-            <p class="helper">식사 메뉴 아이디어를 공유해 주세요.</p>
+            <h2 data-i18n="commentsTitle">댓글</h2>
+            <p class="helper" data-i18n="commentsHelper">식사 메뉴 아이디어를 공유해 주세요.</p>
             <div id="disqus_thread"></div>
-            <noscript>댓글을 보려면 자바스크립트를 활성화해 주세요.</noscript>
+            <noscript data-i18n="commentsNoscript">댓글을 보려면 자바스크립트를 활성화해 주세요.</noscript>
         </section>
     </main>
 

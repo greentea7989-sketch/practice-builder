@@ -82,8 +82,8 @@ body::before {
     text-transform: uppercase;
     padding: 0.3rem 0.7rem;
     border-radius: 999px;
-    background: var(--secondary);
-    color: #0f1a16;
+    background: var(--outline);
+    color: var(--ink);
     font-weight: 700;
     margin-bottom: 0.8rem;
 }
@@ -104,6 +104,38 @@ h1 {
     display: flex;
     align-items: center;
     gap: 0.8rem;
+}
+
+.lang-select {
+    display: inline-flex;
+    align-items: center;
+}
+
+.lang-select select {
+    font-family: var(--font-title);
+    border: 1px solid var(--outline);
+    border-radius: 999px;
+    padding: 0.6rem 1.1rem;
+    background: var(--card-bg);
+    color: var(--ink);
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.lang-select select:hover {
+    box-shadow: 0 8px 20px var(--shadow);
+    transform: translateY(-1px);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
 
 .theme-toggle,
@@ -357,7 +389,7 @@ textarea {
     padding: 0.8rem 1rem;
     border-radius: 12px;
     background: rgba(27, 153, 139, 0.12);
-    color: var(--secondary-dark);
+    color: var(--ink);
     font-size: 0.95rem;
     display: none;
 }
@@ -445,7 +477,7 @@ textarea {
     padding: 0.7rem 1rem;
     border-radius: 12px;
     background: rgba(27, 153, 139, 0.12);
-    color: var(--secondary-dark);
+    color: var(--ink);
     font-weight: 600;
     display: flex;
     justify-content: space-between;
@@ -456,6 +488,7 @@ textarea {
     font-size: 0.8rem;
     color: var(--muted);
 }
+
 
 @keyframes pop {
     0% {
